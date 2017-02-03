@@ -62,4 +62,22 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$.title", is("Ddlj")));
     }
 
+    @Test
+    public void shouldFindMovieById() throws Exception {
+        Movie m = new Movie();
+        m.setId(3);
+        m.setTitle("Ddlj");
+
+        given(this.service.findById(3))
+                .willReturn(m);
+
+        MockHttpServletRequestBuilder request = get("/movies/3");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(3)))
+                .andExpect(jsonPath("$.title", is("Ddlj")));
+    }
+
+
 }

@@ -3,10 +3,7 @@ package com.allstate.controllers;
 import com.allstate.entities.Movie;
 import com.allstate.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by localadmin on 2/3/17.
@@ -24,5 +21,10 @@ public class MovieController {
     @RequestMapping(value= {"","/"}, method = RequestMethod.POST)
     public Movie create(@RequestBody Movie movie){
         return this.service.create(movie);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Movie getById(@PathVariable int id) {
+        return this.service.findById(id);
     }
 }
